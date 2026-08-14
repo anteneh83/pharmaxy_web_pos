@@ -275,3 +275,10 @@ export const purposeOptions = [
   'Stock Transfer',
   'Sample Distribution',
 ];
+
+// --- Additional Right Panel Mock Data Arrays ---
+export const periodOptions = ['2026-08 (Aug)', '2026-07 (Jul)', '2026-Q3 (Quarter 3)', '2026-Q2 (Quarter 2)', '2026-FY (Fiscal Year)'];
+export const orgUnitOptions = ['Main Store - Counter 1', 'Main Store - Counter 2', 'Outpatient Pharmacy Unit', 'Emergency Pharmacy Station', 'Inpatient Dispensary'];
+export const storeOptions = ['Downtown Main Pharmacy', 'Central Dispensary', 'Eastside Express Store', 'Warehouse Central', 'Unit 3 Dispensary'];
+export const termOptions = ['Net 30 Days', 'Immediate Cash', 'Insurance Direct Billed', 'Net 15 Days', 'Government Grant Plan'];
+

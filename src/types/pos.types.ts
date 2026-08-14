@@ -237,6 +237,7 @@ export interface POSState {
   cartCount: number;
   serialNumber: string;
   fromStore: string;
+  toStore: string;
   purpose: string;
   voucherNote: string;
   lineItemNote: string;

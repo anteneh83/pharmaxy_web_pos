@@ -373,7 +373,7 @@ html, body, #root {
 
 /* --- RIGHT PANEL --- */
 .pos-right-panel {
-  width: 340px;
+  width: 410px;
   background: var(--panel-bg);
   border-left: 1px solid var(--border-subtle);
   display: flex;
@@ -390,12 +390,15 @@ html, body, #root {
 .right-panel-table td {
   padding: 3px 8px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
 }
 
 .right-panel-table td.label-cell {
-  width: 140px;
+  width: 150px;
   color: var(--text-muted);
   font-weight: 500;
+  white-space: nowrap;
+  font-size: 11px;
 }
 
 .right-panel-table td.input-cell input,
@@ -405,38 +408,131 @@ html, body, #root {
   background: var(--input-bg);
   border: 1px solid var(--input-border);
   color: var(--text-main);
-  padding: 3px 6px;
+  padding: 2px 5px;
   border-radius: 2px;
   font-size: 11px;
+  outline: none;
 }
 
+.right-panel-table td.input-cell input:focus,
+.right-panel-table td.input-cell select:focus,
+.right-panel-table td.input-cell textarea:focus {
+  border-color: var(--input-focus);
+}
+
+/* Control wrappers matching reference screenshot */
+.input-control-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.btn-ctrl-dropdown {
+  background: var(--panel-bg-alt);
+  border: 1px solid var(--input-border);
+  color: var(--text-muted);
+  min-width: 18px;
+  height: 22px;
+  padding: 0 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  cursor: pointer;
+  border-radius: 2px;
+  user-select: none;
+}
+
+.btn-ctrl-dropdown:hover {
+  background: var(--header-bg);
+  color: var(--text-bright);
+}
+
+.btn-ctrl-plus {
+  background: var(--panel-bg-alt);
+  border: 1px solid var(--input-border);
+  color: var(--text-main);
+  min-width: 20px;
+  height: 22px;
+  padding: 0 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.btn-ctrl-plus:hover {
+  background: var(--header-bg);
+}
+
+.btn-ctrl-red-x {
+  background: #dc2626;
+  border: 1px solid #b91c1c;
+  color: #ffffff;
+  min-width: 18px;
+  height: 22px;
+  padding: 0 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.btn-ctrl-red-x:hover {
+  background: #ef4444;
+}
+
+/* Orange highlighted rows for LineitemExtension 1 and 2 */
+.right-panel-table tr.extension-orange,
 .right-panel-table tr.extension-orange td {
-  background: var(--accent-orange-bg);
+  background-color: #d97736 !important;
+  border-bottom: 1px solid #b85f24 !important;
 }
 
 .right-panel-table tr.extension-orange td.label-cell {
-  color: var(--accent-orange);
-  font-weight: 700;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .right-panel-table tr.extension-orange td input {
-  border-color: rgba(224, 122, 56, 0.5);
-  color: #ffedd5;
+  background-color: #e08343 !important;
+  border: 1px solid #a34e15 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
 }
 
-.subtotal-box {
-  background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
-  border: 1px solid var(--accent-cyan);
-  border-radius: 4px;
-  padding: 10px;
-  margin: 10px;
+.right-panel-table tr.extension-orange td input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Sub Total highlight row at bottom */
+.right-panel-table tr.subtotal-row,
+.right-panel-table tr.subtotal-row td {
+  background: linear-gradient(90deg, #1e3a5f 0%, #0284c7 100%) !important;
+  border-top: 2px solid var(--accent-cyan) !important;
+  padding: 6px 8px !important;
+}
+
+.right-panel-table tr.subtotal-row td.subtotal-label {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.5px;
+}
+
+.right-panel-table tr.subtotal-row td.subtotal-val-cell {
   text-align: right;
-}
-
-.subtotal-val {
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--accent-cyan);
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 14px !important;
   font-family: var(--font-mono);
 }
 
