@@ -202,7 +202,6 @@ export const RightPanel: React.FC = () => {
             <td className="label-cell">From Store</td>
             <td className="input-cell">
               <div className="input-control-group">
-                <button className="btn-ctrl-plus" style={{ fontSize: '9px' }}>...</button>
                 <input
                   type="text"
                   value={fromStore}
@@ -228,7 +227,6 @@ export const RightPanel: React.FC = () => {
             <td className="label-cell">To Store</td>
             <td className="input-cell">
               <div className="input-control-group">
-                <button className="btn-ctrl-plus" style={{ fontSize: '9px' }}>...</button>
                 <input
                   type="text"
                   value={toStore}
