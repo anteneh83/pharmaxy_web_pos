@@ -6,10 +6,12 @@ import type { UnitOfMeasure } from '../types/pos.types';
 export const ArticleSection: React.FC = () => {
   const {
     selectedDrug,
+    searchQuery,
     selectedUOM,
     articleDescription,
     selectedCategory,
     articleLocation,
+    setSearchQuery,
     setSelectedDrug,
     setSelectedUOM,
     setSelectedCategory,
@@ -24,11 +26,40 @@ export const ArticleSection: React.FC = () => {
   const [barcodeInput, setBarcodeInput] = useState('');
   const [scaleWeight, setScaleWeight] = useState<string | null>(null);
 
+  // Filter drugs dynamically by selectedCategory and searchQuery
+  const filteredDrugs = mockDrugs.filter((drug) => {
+    const matchesCategory =
+      selectedCategory === 'All Categories' || drug.category.toLowerCase() === selectedCategory.toLowerCase();
+
+    const q = searchQuery.toLowerCase().trim();
+    const matchesSearch =
+      !q ||
+      drug.name.toLowerCase().includes(q) ||
+      drug.code.toLowerCase().includes(q) ||
+      drug.genericName.toLowerCase().includes(q) ||
+      drug.barcode.includes(q) ||
+      drug.description.toLowerCase().includes(q) ||
+      drug.shelfLocation.toLowerCase().includes(q);
+
+    return matchesCategory && matchesSearch;
+  });
+
   const handleDrugSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const code = e.target.value;
     const drug = mockDrugs.find((d) => d.code === code);
     if (drug) {
       setSelectedDrug(drug);
+    } else {
+      setSelectedDrug(null);
+    }
+  };
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (filteredDrugs.length > 0) {
+        setSelectedDrug(filteredDrugs[0]);
+      }
     }
   };
 
@@ -90,26 +121,50 @@ export const ArticleSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Row 1: Article Search Dropdown */}
-      <div className="article-row-1">
-        <label className="consignee-label">Article</label>
+      {/* Row 1: Quick Search Filter Input & Filtered Select Dropdown (Wide Article box, Compact UOM box) */}
+      <div className="article-row-1" style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%' }}>
+        <label className="consignee-label" style={{ whiteSpace: 'nowrap', flexShrink: 0 }}>
+          Search / Article
+        </label>
+
+        {/* Live Search Input */}
+        <input
+          type="text"
+          className="pos-input"
+          style={{ width: '150px', flexShrink: 0, fontFamily: 'var(--font-mono)' }}
+          placeholder="Filter drugs..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleSearchKeyDown}
+          title="Type to filter drug list in real-time"
+        />
+
+        {/* Filtered Drug Dropdown (WIDER SPACE) */}
         <select
           className="pos-select"
+          style={{ flex: 1, minWidth: '220px', width: '100%' }}
           value={selectedDrug ? selectedDrug.code : ''}
           onChange={handleDrugSelect}
         >
-          <option value="">-- Select Drug / Medicine --</option>
-          {mockDrugs.map((drug) => (
+          <option value="">
+            {filteredDrugs.length === 0
+              ? '-- No drugs match filter --'
+              : `-- Select Drug / Medicine (${filteredDrugs.length} available) --`}
+          </option>
+          {filteredDrugs.map((drug) => (
             <option key={drug.id} value={drug.code}>
-              [{drug.code}] {drug.name} {drug.strength} — ${drug.price.toFixed(2)} ({drug.category}) {drug.isControlled ? `🔴 Sch ${drug.schedule}` : ''}
+              [{drug.code}] {drug.name} {drug.strength} — ${drug.price.toFixed(2)} ({drug.category}){' '}
+              {drug.isControlled ? `🔴 Sch ${drug.schedule}` : ''}
             </option>
           ))}
         </select>
-        <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+
+        {/* UOM Select (LESS WIDE / COMPACT SPACE) */}
+        <div style={{ display: 'flex', gap: '4px', alignItems: 'center', flexShrink: 0 }}>
           <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>UOM</span>
           <select
             className="pos-select"
-            style={{ flex: 1 }}
+            style={{ width: '85px' }}
             value={selectedUOM}
             onChange={(e) => setSelectedUOM(e.target.value as UnitOfMeasure)}
           >
@@ -138,18 +193,37 @@ export const ArticleSection: React.FC = () => {
       {/* Row 3: Category & Location */}
       <div className="article-row-3">
         <label className="consignee-label">Category</label>
-        <select
-          className="pos-select"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          {drugCategories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
-        <label className="consignee-label" style={{ textAlign: 'right', paddingRight: '4px' }}>Location</label>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <select
+            className="pos-select"
+            style={{ flex: 1 }}
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            {drugCategories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+          <span
+            style={{
+              fontSize: '10px',
+              padding: '2px 6px',
+              borderRadius: '10px',
+              background: 'var(--bg-tertiary)',
+              color: 'var(--accent-cyan)',
+              whiteSpace: 'nowrap',
+              border: '1px solid var(--border-color)',
+            }}
+          >
+            {filteredDrugs.length}/{mockDrugs.length} drugs
+          </span>
+        </div>
+
+        <label className="consignee-label" style={{ textAlign: 'right', paddingRight: '4px' }}>
+          Location
+        </label>
         <input
           type="text"
           className="pos-input"
@@ -176,7 +250,17 @@ export const ArticleSection: React.FC = () => {
         </button>
 
         {selectedDrug?.isControlled && (
-          <span style={{ marginLeft: 'auto', background: '#991b1b', color: '#fecaca', padding: '3px 8px', borderRadius: '3px', fontWeight: 600, fontSize: '11px' }}>
+          <span
+            style={{
+              marginLeft: 'auto',
+              background: '#991b1b',
+              color: '#fecaca',
+              padding: '3px 8px',
+              borderRadius: '3px',
+              fontWeight: 600,
+              fontSize: '11px',
+            }}
+          >
             ⚠️ CONTROLLED DRUG SCHEDULE {selectedDrug.schedule} — LOGGING ACTIVE
           </span>
         )}

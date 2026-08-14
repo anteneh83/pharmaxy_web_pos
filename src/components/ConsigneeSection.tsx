@@ -235,7 +235,7 @@ export const ConsigneeSection: React.FC = () => {
                 >
                   <div>
                     <strong>{p.fullName}</strong> ({p.gender}, {p.dateOfBirth})
-                    <br/>
+                    <br />
                     <small style={{ color: '#94a3b8' }}>Phone: {p.phone} | Ins: {p.insuranceProvider || 'None'}</small>
                   </div>
                   <button className="btn-pos-action">Select</button>
