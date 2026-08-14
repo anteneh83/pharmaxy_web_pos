@@ -279,4 +279,6 @@ export const periodOptions = ['2026-08 (Aug)', '2026-07 (Jul)', '2026-Q3 (Quarte
 export const orgUnitOptions = ['Main Store - Counter 1', 'Main Store - Counter 2', 'Outpatient Pharmacy Unit', 'Emergency Pharmacy Station', 'Inpatient Dispensary'];
 export const storeOptions = ['Downtown Main Pharmacy', 'Central Dispensary', 'Eastside Express Store', 'Warehouse Central', 'Unit 3 Dispensary'];
 export const termOptions = ['Net 30 Days', 'Immediate Cash', 'Insurance Direct Billed', 'Net 15 Days', 'Government Grant Plan'];
+export const currencyOptions = ['ETB', 'USD', 'EUR', 'GBP'];
+
 

@@ -1,34 +1,30 @@
-/* ============================================================================
-   Pharmacy WebPOS - Global CSS System & Layout Styling
-   Faithfully replicating desktop NVS POS layout with modern glassmorphism
-   ============================================================================ */
-
 :root {
-  --bg-dark: #161a22;
-  --panel-bg: #1e2430;
-  --panel-bg-alt: #242c3a;
-  --header-bg: #293243;
-  --input-bg: #131822;
-  --input-border: #38455a;
-  --input-focus: #00d2ff;
-  
-  --text-main: #e2e8f0;
-  --text-muted: #94a3b8;
-  --text-bright: #ffffff;
-  
-  --accent-cyan: #00d2ff;
+  /* Desktop POS Theme matching screenshot */
+  --bg-dark: #d8e0e6;
+  --panel-bg: #e6ecf0;
+  --panel-bg-alt: #d5e0e8;
+  --header-bg: #cad5e2;
+  --input-bg: #ffffff;
+  --input-border: #8096ab;
+  --input-focus: #0284c7;
+
+  --text-main: #0f172a;
+  --text-muted: #334155;
+  --text-bright: #020617;
+
+  --accent-cyan: #0284c7;
   --accent-blue: #2563eb;
-  --accent-orange: #e07a38;
-  --accent-orange-bg: rgba(224, 122, 56, 0.15);
-  --accent-green: #10b981;
-  --accent-red: #ef4444;
+  --accent-orange: #d97736;
+  --accent-orange-bg: rgba(217, 119, 54, 0.15);
+  --accent-green: #15803d;
+  --accent-red: #dc2626;
 
-  --row-cyan-bar: #00b4d8;
-  --row-hover: #2a3446;
-  --row-selected: #1e3a5f;
+  --row-cyan-bar: #0284c7;
+  --row-hover: #dbeafe;
+  --row-selected: #2563eb;
 
-  --border-subtle: #2d3748;
-  --border-light: #4a5568;
+  --border-subtle: #94a3b8;
+  --border-light: #64748b;
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
@@ -57,18 +53,18 @@ html, body, #root {
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  background: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
+  background: #d8e0e6;
 }
 
 /* --- TOOLBAR --- */
 .pos-toolbar-container {
-  background: linear-gradient(180deg, #2a3446 0%, #1e2533 100%);
+  background: linear-gradient(180deg, #edf3f8 0%, #d8e2eb 100%);
   border-bottom: 1px solid var(--border-subtle);
   padding: 6px 12px;
   display: flex;
   align-items: center;
   gap: 16px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   z-index: 10;
 }
 
@@ -95,8 +91,8 @@ html, body, #root {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: 1px solid transparent;
+  background: #f1f5f9;
+  border: 1px solid #94a3b8;
   color: var(--text-main);
   padding: 4px 10px;
   border-radius: 4px;
@@ -107,8 +103,8 @@ html, body, #root {
 }
 
 .tool-btn:hover {
-  background: rgba(0, 210, 255, 0.1);
-  border-color: rgba(0, 210, 255, 0.3);
+  background: #ffffff;
+  border-color: var(--accent-cyan);
   color: var(--accent-cyan);
 }
 
@@ -124,10 +120,10 @@ html, body, #root {
 }
 
 .tool-btn.btn-save svg { color: var(--accent-green); }
-.tool-btn.btn-print svg { color: #a7f3d0; }
-.tool-btn.btn-card svg { color: #fde047; }
-.tool-btn.btn-preview svg { color: #c084fc; }
-.tool-btn.btn-refresh svg { color: #38bdf8; }
+.tool-btn.btn-print svg { color: #0284c7; }
+.tool-btn.btn-card svg { color: #d97706; }
+.tool-btn.btn-preview svg { color: #7c3aed; }
+.tool-btn.btn-refresh svg { color: #0284c7; }
 
 /* --- HEADER FILTERS --- */
 .pos-header-filters {
@@ -149,7 +145,7 @@ html, body, #root {
 
 .filter-group label {
   color: var(--text-muted);
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
 }
 
@@ -166,7 +162,7 @@ html, body, #root {
 
 .pos-input:focus, .pos-select:focus {
   border-color: var(--input-focus);
-  box-shadow: 0 0 0 2px rgba(0, 210, 255, 0.2);
+  box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
 }
 
 .pos-input-sm { width: 110px; }
@@ -174,14 +170,15 @@ html, body, #root {
 .pos-input-lg { width: 220px; }
 
 .flag-btn {
-  background: var(--panel-bg-alt);
+  background: #f1f5f9;
   border: 1px solid var(--input-border);
   color: var(--accent-cyan);
   padding: 4px 8px;
   border-radius: 3px;
   cursor: pointer;
+  font-weight: 600;
 }
-.flag-btn:hover { background: rgba(0, 210, 255, 0.15); }
+.flag-btn:hover { background: #ffffff; }
 
 /* --- MAIN BODY (LEFT WORK AREA + RIGHT PANEL) --- */
 .pos-body {
@@ -197,7 +194,7 @@ html, body, #root {
   padding: 8px;
   gap: 8px;
   overflow-y: auto;
-  background: rgba(15, 23, 42, 0.6);
+  background: #d8e0e6;
 }
 
 /* --- CONSIGNEE SECTION --- */
@@ -223,7 +220,7 @@ html, body, #root {
 
 .consignee-label {
   color: var(--text-muted);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 11px;
 }
 
@@ -235,9 +232,9 @@ html, body, #root {
 
 .consignee-unit-bar {
   height: 24px;
-  background: linear-gradient(90deg, #00b4d8 0%, #0077b6 100%);
+  background: linear-gradient(90deg, #38bdf8 0%, #0284c7 100%);
   border-radius: 2px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -245,7 +242,7 @@ html, body, #root {
 }
 
 .consignee-dots-btn {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.2);
   border: none;
   color: #fff;
   width: 20px;
@@ -296,7 +293,7 @@ html, body, #root {
 }
 
 .btn-pos-action {
-  background: var(--panel-bg-alt);
+  background: #ffffff;
   border: 1px solid var(--input-border);
   color: var(--text-main);
   padding: 5px 16px;
@@ -309,7 +306,7 @@ html, body, #root {
 
 .btn-pos-action:hover {
   background: var(--accent-cyan);
-  color: #000;
+  color: #ffffff;
   border-color: var(--accent-cyan);
 }
 
@@ -334,8 +331,8 @@ html, body, #root {
 
 .grid-table th {
   background: var(--header-bg);
-  color: var(--text-muted);
-  font-weight: 600;
+  color: #0f172a;
+  font-weight: 700;
   padding: 8px 10px;
   border-bottom: 1px solid var(--border-subtle);
   border-right: 1px solid var(--border-subtle);
@@ -351,23 +348,36 @@ html, body, #root {
   color: var(--text-main);
 }
 
+.grid-table tr {
+  background: #ffffff;
+}
+
+.grid-table tr:nth-child(even) {
+  background: #f8fafc;
+}
+
 .grid-table tr:hover {
   background: var(--row-hover);
 }
 
 .grid-table tr.selected {
   background: var(--row-selected);
-  color: #fff;
+  color: #ffffff;
+}
+
+.grid-table tr.selected td {
+  color: #ffffff !important;
 }
 
 .grid-table input.qty-input {
   width: 50px;
   background: var(--input-bg);
-  border: 1px solid var(--accent-cyan);
-  color: #fff;
+  border: 1px solid var(--input-border);
+  color: var(--text-main);
   padding: 2px 4px;
   border-radius: 2px;
   text-align: center;
+  font-weight: 600;
 }
 
 /* --- RIGHT PANEL --- */
@@ -388,14 +398,14 @@ html, body, #root {
 
 .right-panel-table td {
   padding: 3px 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-subtle);
   vertical-align: middle;
 }
 
 .right-panel-table td.label-cell {
   width: 150px;
   color: var(--text-muted);
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
   font-size: 11px;
 }
@@ -428,7 +438,7 @@ html, body, #root {
 }
 
 .btn-ctrl-dropdown {
-  background: var(--panel-bg-alt);
+  background: #e2e8f0;
   border: 1px solid var(--input-border);
   color: var(--text-muted);
   min-width: 18px;
@@ -449,7 +459,7 @@ html, body, #root {
 }
 
 .btn-ctrl-plus {
-  background: var(--panel-bg-alt);
+  background: #e2e8f0;
   border: 1px solid var(--input-border);
   color: var(--text-main);
   min-width: 20px;
@@ -512,39 +522,98 @@ html, body, #root {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Sub Total highlight row at bottom */
-.right-panel-table tr.subtotal-row,
-.right-panel-table tr.subtotal-row td {
-  background: linear-gradient(90deg, #1e3a5f 0%, #0284c7 100%) !important;
-  border-top: 2px solid var(--accent-cyan) !important;
-  padding: 6px 8px !important;
+/* Teal summary section at bottom of Right Panel (matching screenshot) */
+.right-panel-table tr.teal-summary-row,
+.right-panel-table tr.teal-summary-row td {
+  background-color: #3f9aa9 !important;
+  border: 1px solid #5ab0be !important;
+  padding: 3px 6px !important;
+  color: #002b36 !important;
+  height: 24px;
 }
 
-.right-panel-table tr.subtotal-row td.subtotal-label {
-  color: #ffffff !important;
+.right-panel-table td.teal-label-cell {
   font-weight: 800 !important;
-  font-size: 12px !important;
-  letter-spacing: 0.5px;
+  font-size: 11px !important;
+  color: #002b36 !important;
+  white-space: nowrap;
+  width: 140px;
 }
 
-.right-panel-table tr.subtotal-row td.subtotal-val-cell {
+.right-panel-table td.teal-ctrl-cell {
+  width: 130px;
+  text-align: center;
+  font-size: 11px !important;
+  color: #002b36 !important;
+  font-weight: 800 !important;
+}
+
+.right-panel-table td.teal-val-cell {
+  width: 140px;
   text-align: right;
-  color: #ffffff !important;
   font-weight: 800 !important;
-  font-size: 14px !important;
+  font-size: 11px !important;
   font-family: var(--font-mono);
+  color: #002b36 !important;
+}
+
+.teal-ctrl-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.teal-checkbox {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #002b36;
+}
+
+.teal-btn-plus {
+  background: #eaf6f8;
+  border: 1px solid #6cb8c6;
+  color: #002b36;
+  width: 22px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 11px;
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 0;
+  line-height: 1;
+}
+
+.teal-btn-plus:hover {
+  background: #ffffff;
+}
+
+.teal-select-field {
+  width: 100%;
+  background: #3f9aa9;
+  border: 1px solid #5ab0be;
+  color: #002b36;
+  font-weight: bold;
+  font-size: 11px;
+  outline: none;
+  cursor: pointer;
 }
 
 /* --- STATUS BAR --- */
 .pos-status-bar {
-  background: #11151c;
+  background: #c8d5e0;
   border-top: 1px solid var(--border-subtle);
   padding: 4px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 11px;
-  color: var(--text-muted);
+  color: #0f172a;
+  font-weight: 500;
 }
 
 .status-pill {
@@ -558,5 +627,5 @@ html, body, #root {
   height: 8px;
   border-radius: 50%;
   background: var(--accent-green);
-  box-shadow: 0 0 8px var(--accent-green);
+  box-shadow: 0 0 6px var(--accent-green);
 }

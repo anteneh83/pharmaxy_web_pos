@@ -211,10 +211,10 @@ export const ArticleSection: React.FC = () => {
               fontSize: '10px',
               padding: '2px 6px',
               borderRadius: '10px',
-              background: 'var(--bg-tertiary)',
-              color: 'var(--accent-cyan)',
+              background: '#e2e8f0',
+              color: '#0284c7',
               whiteSpace: 'nowrap',
-              border: '1px solid var(--border-color)',
+              border: '1px solid #cbd5e1',
             }}
           >
             {filteredDrugs.length}/{mockDrugs.length} drugs
@@ -237,7 +237,7 @@ export const ArticleSection: React.FC = () => {
       <div className="action-btn-group">
         <button
           className="btn-pos-action"
-          style={{ background: 'var(--accent-cyan)', color: '#000', borderColor: 'var(--accent-cyan)' }}
+          style={{ background: '#0284c7', color: '#ffffff', borderColor: '#0284c7' }}
           onClick={() => addLineItem()}
         >
           ➕ Add to Voucher

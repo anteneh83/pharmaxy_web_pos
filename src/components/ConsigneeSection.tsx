@@ -217,26 +217,26 @@ export const ConsigneeSection: React.FC = () => {
       {patientModalOpen && (
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-          background: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100
+          background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100
         }}>
-          <div style={{ background: '#1e2430', border: '1px solid #00d2ff', borderRadius: '8px', padding: '20px', width: '500px' }}>
-            <h3 style={{ color: '#00d2ff', marginBottom: '10px' }}>Patient Database Directory</h3>
+          <div style={{ background: '#e6ecf0', border: '1px solid #0284c7', borderRadius: '8px', padding: '20px', width: '500px', color: '#0f172a' }}>
+            <h3 style={{ color: '#0284c7', marginBottom: '10px' }}>Patient Database Directory</h3>
             <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
               {mockPatients.map(p => (
                 <div
                   key={p.id}
                   onClick={() => { selectPatient(p); setPatientModalOpen(false); }}
                   style={{
-                    padding: '8px', borderBottom: '1px solid #2d3748', cursor: 'pointer',
-                    display: 'flex', justifyContent: 'space-between'
+                    padding: '8px', borderBottom: '1px solid #cbd5e1', cursor: 'pointer',
+                    display: 'flex', justifyContent: 'space-between', color: '#0f172a'
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = '#2a3446')}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = '#dbeafe')}
                   onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                 >
                   <div>
                     <strong>{p.fullName}</strong> ({p.gender}, {p.dateOfBirth})
                     <br />
-                    <small style={{ color: '#94a3b8' }}>Phone: {p.phone} | Ins: {p.insuranceProvider || 'None'}</small>
+                    <small style={{ color: '#475569' }}>Phone: {p.phone} | Ins: {p.insuranceProvider || 'None'}</small>
                   </div>
                   <button className="btn-pos-action">Select</button>
                 </div>

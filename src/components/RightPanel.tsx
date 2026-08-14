@@ -7,6 +7,7 @@ import {
   storeOptions,
   purposeOptions,
   termOptions,
+  currencyOptions,
 } from '../data/mockData';
 import { formatCurrency } from '../utils/helpers';
 
@@ -31,6 +32,19 @@ export const RightPanel: React.FC = () => {
     extensions,
     fsNo,
     mrcNo,
+    subTotal,
+    additionalChargeEnabled,
+    additionalCharge,
+    discountEnabled,
+    discountTotal,
+    withholdingEnabled,
+    withholdingAmount,
+    vatAmount,
+    tot1Amount,
+    tot2Amount,
+    nonTaxableAmount,
+    grandTotal,
+    currency,
     setRightPanelField,
     setExtension,
     clearCart,
@@ -43,7 +57,7 @@ export const RightPanel: React.FC = () => {
           {/* 1. Voucher No */}
           <tr>
             <td className="label-cell">Voucher No</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <input
                 type="text"
                 value={currentVoucherNo}
@@ -55,7 +69,7 @@ export const RightPanel: React.FC = () => {
           {/* 2. Period */}
           <tr>
             <td className="label-cell">Period</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group">
                 <input
                   type="text"
@@ -79,7 +93,7 @@ export const RightPanel: React.FC = () => {
           {/* 3. Remark */}
           <tr>
             <td className="label-cell">Remark</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <input
                 type="text"
                 value={remark}
@@ -91,7 +105,7 @@ export const RightPanel: React.FC = () => {
           {/* 4. Organization Unit */}
           <tr>
             <td className="label-cell">Organization Unit</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group">
                 <input
                   type="text"
@@ -115,7 +129,7 @@ export const RightPanel: React.FC = () => {
           {/* 5. Quantity */}
           <tr>
             <td className="label-cell">Quantity</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group">
                 <input
                   type="text"
@@ -134,7 +148,7 @@ export const RightPanel: React.FC = () => {
           {/* 6. Value */}
           <tr>
             <td className="label-cell">Value</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group">
                 <input
                   type="text"
@@ -150,7 +164,7 @@ export const RightPanel: React.FC = () => {
           {/* 7. Payment Options */}
           <tr>
             <td className="label-cell">Payment Options</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group">
                 <select
                   value={paymentMethod}
@@ -168,7 +182,7 @@ export const RightPanel: React.FC = () => {
           {/* 8. Cart */}
           <tr>
             <td className="label-cell">Cart</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group">
                 <input
                   type="text"
@@ -184,7 +198,7 @@ export const RightPanel: React.FC = () => {
           {/* 9. Serial Number */}
           <tr>
             <td className="label-cell">Serial Number</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group">
                 <button className="btn-ctrl-plus" title="Add New Serial">+</button>
                 <input
@@ -200,7 +214,7 @@ export const RightPanel: React.FC = () => {
           {/* 10. From Store */}
           <tr>
             <td className="label-cell">From Store</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group">
                 <input
                   type="text"
@@ -225,7 +239,7 @@ export const RightPanel: React.FC = () => {
           {/* 11. To Store */}
           <tr>
             <td className="label-cell">To Store</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group">
                 <input
                   type="text"
@@ -250,7 +264,7 @@ export const RightPanel: React.FC = () => {
           {/* 12. Purpose */}
           <tr>
             <td className="label-cell">Purpose</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group">
                 <select
                   value={purpose}
@@ -268,7 +282,7 @@ export const RightPanel: React.FC = () => {
           {/* 13. Voucher Note */}
           <tr>
             <td className="label-cell" style={{ verticalAlign: 'top', paddingTop: '6px' }}>Voucher Note</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group" style={{ alignItems: 'flex-end' }}>
                 <textarea
                   rows={2}
@@ -283,7 +297,7 @@ export const RightPanel: React.FC = () => {
           {/* 14. Lineitem Note */}
           <tr>
             <td className="label-cell">Lineitem Note</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group">
                 <input
                   type="checkbox"
@@ -305,7 +319,7 @@ export const RightPanel: React.FC = () => {
           {/* 15. Term */}
           <tr>
             <td className="label-cell">Term</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group">
                 <button className="btn-ctrl-plus" title="Add Term">+</button>
                 <input
@@ -330,7 +344,7 @@ export const RightPanel: React.FC = () => {
           {/* 16. LineitemExtension 1 (Orange Background) */}
           <tr className="extension-orange">
             <td className="label-cell">LineitemExtension 1</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <input
                 type="text"
                 value={extensions.lineItemExt1}
@@ -342,7 +356,7 @@ export const RightPanel: React.FC = () => {
           {/* 17. LineitemExtension 2 (Orange Background) */}
           <tr className="extension-orange">
             <td className="label-cell">LineitemExtension 2</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <input
                 type="text"
                 value={extensions.lineItemExt2}
@@ -354,7 +368,7 @@ export const RightPanel: React.FC = () => {
           {/* 18. VoucherExtension1 */}
           <tr>
             <td className="label-cell">VoucherExtension1</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <input
                 type="text"
                 value={extensions.voucherExt1}
@@ -366,7 +380,7 @@ export const RightPanel: React.FC = () => {
           {/* 19. VoucherExtension2 */}
           <tr>
             <td className="label-cell">VoucherExtension2</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <input
                 type="text"
                 value={extensions.voucherExt2}
@@ -378,7 +392,7 @@ export const RightPanel: React.FC = () => {
           {/* 20. VoucherExtension3 */}
           <tr>
             <td className="label-cell">VoucherExtension3</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <input
                 type="text"
                 value={extensions.voucherExt3}
@@ -390,7 +404,7 @@ export const RightPanel: React.FC = () => {
           {/* 21. VoucherExtension4 */}
           <tr>
             <td className="label-cell">VoucherExtension4</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <input
                 type="text"
                 value={extensions.voucherExt4}
@@ -402,7 +416,7 @@ export const RightPanel: React.FC = () => {
           {/* 22. VoucherExtension5 */}
           <tr>
             <td className="label-cell">VoucherExtension5</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <input
                 type="text"
                 value={extensions.voucherExt5}
@@ -414,7 +428,7 @@ export const RightPanel: React.FC = () => {
           {/* 23. VoucherExtension6 */}
           <tr>
             <td className="label-cell">VoucherExtension6</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <input
                 type="text"
                 value={extensions.voucherExt6}
@@ -426,7 +440,7 @@ export const RightPanel: React.FC = () => {
           {/* 24. VoucherExtension7 */}
           <tr>
             <td className="label-cell">VoucherExtension7</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group">
                 <input
                   type="text"
@@ -451,7 +465,7 @@ export const RightPanel: React.FC = () => {
           {/* 25. VoucherExtension8 */}
           <tr>
             <td className="label-cell">VoucherExtension8</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <div className="input-control-group">
                 <input
                   type="text"
@@ -476,7 +490,7 @@ export const RightPanel: React.FC = () => {
           {/* 26. FS No. */}
           <tr>
             <td className="label-cell">FS No.</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <input
                 type="text"
                 value={fsNo}
@@ -488,7 +502,7 @@ export const RightPanel: React.FC = () => {
           {/* 27. MRC No. */}
           <tr>
             <td className="label-cell">MRC No.</td>
-            <td className="input-cell">
+            <td className="input-cell" colSpan={2}>
               <input
                 type="text"
                 value={mrcNo}
@@ -497,10 +511,120 @@ export const RightPanel: React.FC = () => {
             </td>
           </tr>
 
-          {/* 28. Sub Total */}
-          <tr className="subtotal-row">
-            <td className="subtotal-label">Sub Total</td>
-            <td className="subtotal-val-cell">{totalValue.toFixed(2)}</td>
+          {/* TEAL SUMMARY SECTION AT BOTTOM (Matching Screenshot) */}
+
+          {/* 1. Sub Total */}
+          <tr className="teal-summary-row">
+            <td className="teal-label-cell">Sub Total</td>
+            <td className="teal-ctrl-cell"></td>
+            <td className="teal-val-cell">{subTotal.toFixed(2)}</td>
+          </tr>
+
+          {/* 2. Additional Charge */}
+          <tr className="teal-summary-row">
+            <td className="teal-label-cell">Additional Charge</td>
+            <td className="teal-ctrl-cell">
+              <div className="teal-ctrl-group">
+                <input
+                  type="checkbox"
+                  className="teal-checkbox"
+                  checked={additionalChargeEnabled}
+                  onChange={(e) => setRightPanelField('additionalChargeEnabled', e.target.checked)}
+                />
+                <button className="teal-btn-plus" title="Add Additional Charge">+</button>
+              </div>
+            </td>
+            <td className="teal-val-cell">{additionalCharge.toFixed(2)}</td>
+          </tr>
+
+          {/* 3. Discount */}
+          <tr className="teal-summary-row">
+            <td className="teal-label-cell">Discount</td>
+            <td className="teal-ctrl-cell">
+              <div className="teal-ctrl-group">
+                <input
+                  type="checkbox"
+                  className="teal-checkbox"
+                  checked={discountEnabled}
+                  onChange={(e) => setRightPanelField('discountEnabled', e.target.checked)}
+                />
+                <button className="teal-btn-plus" title="Add Discount">+</button>
+              </div>
+            </td>
+            <td className="teal-val-cell">{discountTotal.toFixed(2)}</td>
+          </tr>
+
+          {/* 4. Withholding */}
+          <tr className="teal-summary-row">
+            <td className="teal-label-cell">Withholding</td>
+            <td className="teal-ctrl-cell">
+              <div className="teal-ctrl-group">
+                <input
+                  type="checkbox"
+                  className="teal-checkbox"
+                  checked={withholdingEnabled}
+                  onChange={(e) => setRightPanelField('withholdingEnabled', e.target.checked)}
+                />
+              </div>
+            </td>
+            <td className="teal-val-cell">{withholdingAmount.toFixed(2)}</td>
+          </tr>
+
+          {/* 5. VAT */}
+          <tr className="teal-summary-row">
+            <td className="teal-label-cell">VAT</td>
+            <td className="teal-ctrl-cell">{vatAmount.toFixed(2)}</td>
+            <td className="teal-val-cell">{vatAmount.toFixed(2)}</td>
+          </tr>
+
+          {/* 6. TOT1 */}
+          <tr className="teal-summary-row">
+            <td className="teal-label-cell">TOT1</td>
+            <td className="teal-ctrl-cell">{tot1Amount.toFixed(2)}</td>
+            <td className="teal-val-cell">{tot1Amount.toFixed(2)}</td>
+          </tr>
+
+          {/* 7. TOT2 */}
+          <tr className="teal-summary-row">
+            <td className="teal-label-cell">TOT2</td>
+            <td className="teal-ctrl-cell">{tot2Amount.toFixed(2)}</td>
+            <td className="teal-val-cell">{tot2Amount.toFixed(2)}</td>
+          </tr>
+
+          {/* 8. NonTaxable */}
+          <tr className="teal-summary-row">
+            <td className="teal-label-cell">NonTaxable</td>
+            <td className="teal-ctrl-cell">{nonTaxableAmount.toFixed(2)}</td>
+            <td className="teal-val-cell">{nonTaxableAmount.toFixed(2)}</td>
+          </tr>
+
+          {/* 9. Grand Total */}
+          <tr className="teal-summary-row">
+            <td className="teal-label-cell">Grand Total</td>
+            <td className="teal-ctrl-cell"></td>
+            <td className="teal-val-cell">{grandTotal.toFixed(2)}</td>
+          </tr>
+
+          {/* 10. Currency */}
+          <tr className="teal-summary-row">
+            <td className="teal-label-cell">Currency</td>
+            <td className="teal-ctrl-cell" colSpan={2}>
+              <select
+                className="teal-select-field"
+                value={currency}
+                onChange={(e) => setRightPanelField('currency', e.target.value)}
+              >
+                {currencyOptions.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+            </td>
+          </tr>
+
+          {/* 11. Bottom Final Total Row */}
+          <tr className="teal-summary-row">
+            <td className="teal-label-cell" colSpan={2}></td>
+            <td className="teal-val-cell">{grandTotal.toFixed(2)}</td>
           </tr>
         </tbody>
       </table>

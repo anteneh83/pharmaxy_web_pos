@@ -243,6 +243,18 @@ export interface POSState {
   fsNo: string;
   mrcNo: string;
   subTotal: number;
+  additionalChargeEnabled: boolean;
+  additionalCharge: number;
+  discountEnabled: boolean;
+  discountTotal: number;
+  withholdingEnabled: boolean;
+  withholdingAmount: number;
+  vatAmount: number;
+  tot1Amount: number;
+  tot2Amount: number;
+  nonTaxableAmount: number;
+  grandTotal: number;
+  currency: string;
 
   // Selected patient
   selectedPatient: Patient | null;

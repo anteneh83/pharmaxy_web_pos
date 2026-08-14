@@ -130,6 +130,19 @@ export const usePOSStore = create<POSStore>((set, get) => ({
   fsNo: 'RX-2026-88391',
   mrcNo: 'MRC-90218-P',
   subTotal: 43.95,
+  additionalChargeEnabled: false,
+  additionalCharge: 0.00,
+  discountEnabled: false,
+  discountTotal: 0.00,
+  withholdingEnabled: false,
+  withholdingAmount: 0.00,
+  vatAmount: 6.60,
+  tot1Amount: 0.00,
+  tot2Amount: 0.00,
+  nonTaxableAmount: 0.00,
+  grandTotal: 50.55,
+  currency: 'ETB',
+
 
   selectedPatient: mockPatients[0],
 
@@ -252,7 +265,10 @@ export const usePOSStore = create<POSStore>((set, get) => ({
     sampleDrugs.forEach((d) => get().addLineItem(d, 1));
   },
 
-  setRightPanelField: (field, value) => set({ [field]: value }),
+  setRightPanelField: (field, value) => {
+    set({ [field]: value });
+    get().recalculateTotals();
+  },
 
   setExtension: (field, value) => {
     set({
@@ -342,15 +358,24 @@ export const usePOSStore = create<POSStore>((set, get) => ({
     const lineItems = get().lineItems;
     const totalQuantity = lineItems.reduce((sum, item) => sum + item.quantity, 0);
     const subTotal = parseFloat(lineItems.reduce((sum, item) => sum + item.totalAmount, 0).toFixed(2));
-    const taxTotal = parseFloat(lineItems.reduce((sum, item) => sum + item.taxAmount, 0).toFixed(2));
-    const totalValue = parseFloat((subTotal + taxTotal).toFixed(2));
+    const vatAmount = parseFloat(lineItems.reduce((sum, item) => sum + item.taxAmount, 0).toFixed(2));
+    const addCharge = get().additionalChargeEnabled ? get().additionalCharge : 0;
+    const disc = get().discountEnabled ? get().discountTotal : 0;
+    const withh = get().withholdingEnabled ? get().withholdingAmount : 0;
+    const tot1 = get().tot1Amount || 0;
+    const tot2 = get().tot2Amount || 0;
+    const grandTotal = parseFloat((subTotal + addCharge - disc - withh + vatAmount + tot1 + tot2).toFixed(2));
+    const totalValue = grandTotal;
     const cartCount = lineItems.length;
 
     set({
       totalQuantity,
       subTotal,
+      vatAmount,
+      grandTotal,
       totalValue,
       cartCount,
     });
   },
+
 }));
